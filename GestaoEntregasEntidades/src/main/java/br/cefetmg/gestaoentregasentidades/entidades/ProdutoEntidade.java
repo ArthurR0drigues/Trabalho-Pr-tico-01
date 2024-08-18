@@ -11,6 +11,7 @@ public class ProdutoEntidade implements Serializable {
     private int id;
     private String nome;
     private String localizacao;
+    private String marca;
     
     @ManyToOne
     @JoinColumn(name = "id_item_pedido")
@@ -18,11 +19,12 @@ public class ProdutoEntidade implements Serializable {
 
     public ProdutoEntidade() {}
 
-    public ProdutoEntidade(int id, String nome, String localizacao, ItemPedidoEntidade itemPedido) {
+    public ProdutoEntidade(int id, String nome, String localizacao, ItemPedidoEntidade itemPedido, String marca) {
         this.id = id;
         this.nome = nome;
         this.localizacao = localizacao;
         this.itemPedido = itemPedido;
+        this.marca = marca;
     }
 
     public int getId() {
@@ -56,4 +58,13 @@ public class ProdutoEntidade implements Serializable {
     public void setItemPedido(ItemPedidoEntidade itemPedido) {
         this.itemPedido = itemPedido;
     }
+    
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
 }

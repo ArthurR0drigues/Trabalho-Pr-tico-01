@@ -1,5 +1,6 @@
 package br.cefetmg.gestaoentregasentidades.entidades;
 
+import br.cefetmg.gestaoentregasentidades.entidades.enums.FormaPagamento;
 import br.cefetmg.gestaoentregasentidades.entidades.enums.Status;
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +17,10 @@ public class PedidoEntidade implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataPedido;
     private double valorTotal;
+    private String observacao;
+    
+    @Enumerated(EnumType.STRING)
+    private FormaPagamento formaPagamento;
     
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -26,16 +31,23 @@ public class PedidoEntidade implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private ClienteEntidade cliente;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_funcionario")
+    private FuncionarioEntidade funcionario;
 
     public PedidoEntidade() {}
 
-    public PedidoEntidade(int id, Date dataPedido, double valorTotal, Status status, List<ItemPedidoEntidade> itemPedidos, ClienteEntidade cliente) {
+    public PedidoEntidade(int id, Date dataPedido, double valorTotal, Status status, List<ItemPedidoEntidade> itemPedidos, ClienteEntidade cliente, FuncionarioEntidade funcionario, FormaPagamento formaPagamento, String observacao) {
         this.id = id;
         this.dataPedido = dataPedido;
         this.valorTotal = valorTotal;
         this.status = status;
         this.itemPedidos = itemPedidos;
         this.cliente = cliente;
+        this.funcionario = funcionario; 
+        this.formaPagamento = formaPagamento;
+        this.observacao = observacao;
     }
 
     public int getId() {
@@ -92,5 +104,29 @@ public class PedidoEntidade implements Serializable {
 
     public void setCliente(ClienteEntidade cliente) {
         this.cliente = cliente;
+    }
+    
+    public FuncionarioEntidade getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(FuncionarioEntidade funcionario) {
+        this.funcionario = funcionario;
+    }
+    
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacoes(String observações) {
+        this.observacao = observacao;
     }
 }
