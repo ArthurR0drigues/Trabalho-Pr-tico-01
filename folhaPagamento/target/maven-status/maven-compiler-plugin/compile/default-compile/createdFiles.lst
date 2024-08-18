@@ -1,0 +1,7 @@
+br\cefetmg\exceptions\ValorVendasInvalidoException.class
+br\cefetmg\folhapagamento\concretas\PorComissao.class
+br\cefetmg\folhapagamento\concretas\PorHora.class
+br\cefetmg\folhapagamento\concretas\PorHoraComissao.class
+br\cefetmg\folhapagamento\interfaces\Comissao.class
+br\cefetmg\folhapagamento\abstracts\Empregado.class
+br\cefetmg\folhapagamento\FolhaPagamento.class

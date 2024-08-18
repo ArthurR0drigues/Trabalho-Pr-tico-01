@@ -1,0 +1,3 @@
+br\cefetmg\gestaoentregasdao\daos\EmpresaDAO.class
+br\cefetmg\gestaoentregasdao\daos\exceptions\DAOException.class
+br\cefetmg\gestaoentregasdao\daos\BaseDAO.class
