@@ -35,4 +35,19 @@ public class App extends Application {
         launch();
     }
 
+    /**
+     * Método estático que abre uma nova janela.
+     * @param titulo (titulo da janela)
+     * @param fxml (nome do arquivo fxml)
+     * @param largura (em pixels)
+     * @param altura (em pixels)
+     * @throws IOException
+     */
+    public static void abrirNovaJanela(String titulo, String fxml, int largura, int altura) throws IOException {
+        Parent root = loadFXML(fxml);
+        Stage novaJanela = new Stage();
+        novaJanela.setTitle(titulo);
+        novaJanela.setScene(new Scene(root, largura, altura));
+        novaJanela.showAndWait();
+    }
 }
