@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "produto")
-public class ProdutoEntidade implements Serializable {
+public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,11 +15,11 @@ public class ProdutoEntidade implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "id_item_pedido")
-    private ItemPedidoEntidade itemPedido;
+    private ItemPedido itemPedido;
 
-    public ProdutoEntidade() {}
+    public Produto() {}
 
-    public ProdutoEntidade(int id, String nome, String localizacao, ItemPedidoEntidade itemPedido, String marca) {
+    public Produto(int id, String nome, String localizacao, ItemPedido itemPedido, String marca) {
         this.id = id;
         this.nome = nome;
         this.localizacao = localizacao;
@@ -51,11 +51,11 @@ public class ProdutoEntidade implements Serializable {
         this.localizacao = localizacao;
     }
 
-    public ItemPedidoEntidade getItemPedido() {
+    public ItemPedido getItemPedido() {
         return itemPedido;
     }
 
-    public void setItemPedido(ItemPedidoEntidade itemPedido) {
+    public void setItemPedido(ItemPedido itemPedido) {
         this.itemPedido = itemPedido;
     }
     

@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "pedido")
-public class PedidoEntidade implements Serializable {
+public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,19 +26,19 @@ public class PedidoEntidade implements Serializable {
     private Status status;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pedido")
-    private List<ItemPedidoEntidade> itemPedidos;
+    private List<ItemPedido> itemPedidos;
     
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    private ClienteEntidade cliente;
+    private Cliente cliente;
     
     @ManyToOne
     @JoinColumn(name = "id_funcionario")
-    private FuncionarioEntidade funcionario;
+    private Funcionario funcionario;
 
-    public PedidoEntidade() {}
+    public Pedido() {}
 
-    public PedidoEntidade(int id, Date dataPedido, double valorTotal, Status status, List<ItemPedidoEntidade> itemPedidos, ClienteEntidade cliente, FuncionarioEntidade funcionario, FormaPagamento formaPagamento, String observacao) {
+    public Pedido(int id, Date dataPedido, double valorTotal, Status status, List<ItemPedido> itemPedidos, Cliente cliente, Funcionario funcionario, FormaPagamento formaPagamento, String observacao) {
         this.id = id;
         this.dataPedido = dataPedido;
         this.valorTotal = valorTotal;
@@ -90,27 +90,27 @@ public class PedidoEntidade implements Serializable {
         this.dataPedido = dataPedido;
     }
 
-    public List<ItemPedidoEntidade> getItemPedidos() {
+    public List<ItemPedido> getItemPedidos() {
         return itemPedidos;
     }
 
-    public void setItemPedidos(List<ItemPedidoEntidade> itemPedidos) {
+    public void setItemPedidos(List<ItemPedido> itemPedidos) {
         this.itemPedidos = itemPedidos;
     }
 
-    public ClienteEntidade getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(ClienteEntidade cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
     
-    public FuncionarioEntidade getFuncionario() {
+    public Funcionario getFuncionario() {
         return funcionario;
     }
 
-    public void setFuncionario(FuncionarioEntidade funcionario) {
+    public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
     

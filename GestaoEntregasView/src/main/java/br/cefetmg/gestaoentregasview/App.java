@@ -1,5 +1,10 @@
 package br.cefetmg.gestaoentregasview;
 
+import br.cefetmg.gestaoentregasdao.dao.DAO;
+import br.cefetmg.gestaoentregasdao.dao.exceptions.DAOException;
+import br.cefetmg.gestaoentregasentidades.entidades.Cliente;
+import br.cefetmg.gestaoentregasentidades.entidades.Empresa;
+import br.cefetmg.gestaoentregasentidades.entidades.Funcionario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JavaFX App
@@ -16,7 +23,13 @@ public class App extends Application {
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, DAOException {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        DAO<Empresa> teste = new DAO<Empresa>(Empresa.class, "persistence");
+        Empresa novo = new Empresa(1, "snacksmart", "cnpjoto", "123456789-11", 0.1, funcionarios, clientes);
+        teste.salvar(novo);
+        System.out.println(teste.consultar(1L).getNome());
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
         stage.show();

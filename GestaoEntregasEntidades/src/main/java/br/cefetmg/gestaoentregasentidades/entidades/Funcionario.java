@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "funcionario")
-public class FuncionarioEntidade implements Serializable {
+public class Funcionario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,18 +15,18 @@ public class FuncionarioEntidade implements Serializable {
     private String telefone;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "funcionario")
-    private List<PerfilEntidade> perfis;
+    private List<Perfil> perfis;
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente")
-    private List<PedidoEntidade> pedidos;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "funcionario")
+    private List<Pedido> pedidos;
     
     @ManyToOne
     @JoinColumn(name = "id_empresa")
-    private EmpresaEntidade empresa;
+    private Empresa empresa;
 
-    public FuncionarioEntidade() {}
+    public Funcionario() {}
 
-    public FuncionarioEntidade(int id, String nome, String senha, String telefone, List<PerfilEntidade> perfis, EmpresaEntidade empresa, List<PedidoEntidade> pedidos) {
+    public Funcionario(int id, String nome, String senha, String telefone, List<Perfil> perfis, Empresa empresa, List<Pedido> pedidos) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
@@ -68,27 +68,27 @@ public class FuncionarioEntidade implements Serializable {
         this.telefone = telefone;
     }
 
-    public List<PerfilEntidade> getPerfis() {
+    public List<Perfil> getPerfis() {
         return perfis;
     }
 
-    public void setPerfis(List<PerfilEntidade> perfis) {
+    public void setPerfis(List<Perfil> perfis) {
         this.perfis = perfis;
     }
 
-    public EmpresaEntidade getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(EmpresaEntidade empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
     
-    public List<PedidoEntidade> getPedidos() {
+    public List<Pedido> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(List<PedidoEntidade> pedidos) {
+    public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
 }

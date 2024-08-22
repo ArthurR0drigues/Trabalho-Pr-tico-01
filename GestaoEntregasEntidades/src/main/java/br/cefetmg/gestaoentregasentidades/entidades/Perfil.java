@@ -6,21 +6,21 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "perfil")
-public class PerfilEntidade implements Serializable {
+public class Perfil implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @ManyToOne
     @JoinColumn(name = "id_funcionario")
-    private FuncionarioEntidade funcionario;
+    private Funcionario funcionario;
     
     @Enumerated(EnumType.STRING)
     private TipoPerfil tipoPerfil;
 
-    public PerfilEntidade() {}
+    public Perfil() {}
 
-    public PerfilEntidade(int id, FuncionarioEntidade funcionario, TipoPerfil tipoPerfil) {
+    public Perfil(int id, Funcionario funcionario, TipoPerfil tipoPerfil) {
         this.id = id;
         this.funcionario = funcionario;
         this.tipoPerfil = tipoPerfil;
@@ -34,11 +34,11 @@ public class PerfilEntidade implements Serializable {
         this.id = id;
     }
 
-    public FuncionarioEntidade getFuncionario() {
+    public Funcionario getFuncionario() {
         return funcionario;
     }
 
-    public void setFuncionario(FuncionarioEntidade funcionario) {
+    public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
 

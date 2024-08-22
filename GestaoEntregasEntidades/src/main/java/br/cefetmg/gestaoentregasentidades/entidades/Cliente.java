@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "cliente")
-public class ClienteEntidade implements Serializable {
+public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,14 +19,14 @@ public class ClienteEntidade implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "id_empresa")
-    private EmpresaEntidade empresa;
+    private Empresa empresa;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente")
-    private List<PedidoEntidade> pedidos;
+    private List<Pedido> pedidos;
 
-    public ClienteEntidade() {}
+    public Cliente() {}
 
-    public ClienteEntidade(int id, String nome, String logradouro, String bairro, String telefone, String CNPJ, String CPF, EmpresaEntidade empresa, List<PedidoEntidade> pedidos) {
+    public Cliente(int id, String nome, String logradouro, String bairro, String telefone, String CNPJ, String CPF, Empresa empresa, List<Pedido> pedidos) {
         this.id = id;
         this.nome = nome;
         this.logradouro = logradouro;
@@ -94,19 +94,19 @@ public class ClienteEntidade implements Serializable {
         this.CPF = CPF;
     }
 
-    public EmpresaEntidade getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(EmpresaEntidade empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
-    public List<PedidoEntidade> getPedidos() {
+    public List<Pedido> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(List<PedidoEntidade> pedidos) {
+    public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
 }

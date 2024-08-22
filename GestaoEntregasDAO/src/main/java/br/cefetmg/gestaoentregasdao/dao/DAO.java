@@ -1,20 +1,22 @@
-package br.cefetmg.gestaoentregasdao.daos;
+package br.cefetmg.gestaoentregasdao.dao;
 
 import java.util.List;
 import javax.persistence.*;
-import br.cefetmg.gestaoentregasdao.daos.exceptions.DAOException;
+import br.cefetmg.gestaoentregasdao.dao.exceptions.DAOException;
 
-public abstract class BaseDAO<T> {
+public class DAO<T> {
     
+    protected final Class<T> entidade;
     protected final EntityManagerFactory entityManagerFactory;
     protected final String nomeEntidade;
     protected final String nomeTabela;
 
-    public BaseDAO(String persistenceUnitName) throws DAOException {
+    public DAO(Class<T> entidade, String persistenceUnitName) throws DAOException {
         try {
+            this.entidade = entidade;
             this.entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnitName);
-            this.nomeEntidade = this.getEntityClass().getSimpleName();
-            this.nomeTabela = this.getEntityClass().getAnnotation(javax.persistence.Table.class).name();
+            this.nomeEntidade = entidade.getSimpleName();
+            this.nomeTabela = this.entidade.getAnnotation(javax.persistence.Table.class).name();
         } catch (Exception e) {
             throw new DAOException("Erro ao criar EntityManagerFactory", e);
         }
@@ -44,7 +46,7 @@ public abstract class BaseDAO<T> {
         T result;
         try {
             entityManager = this.entityManagerFactory.createEntityManager();
-            result = entityManager.find(getEntityClass(), id);
+            result = entityManager.find(entidade, id);
         } catch (Exception e) {
             throw new DAOException("Erro ao consultar " + nomeEntidade, e);
         } finally {
@@ -60,7 +62,7 @@ public abstract class BaseDAO<T> {
         List<T> result;
         try {
             entityManager = this.entityManagerFactory.createEntityManager();
-            result = entityManager.createQuery("FROM " + nomeEntidade + " t", getEntityClass()).getResultList();
+            result = entityManager.createQuery("FROM " + nomeEntidade + " t", entidade).getResultList();
         } catch (Exception e) {
             throw new DAOException("Erro ao consultar todos os " + nomeEntidade, e);
         } finally {
@@ -111,6 +113,4 @@ public abstract class BaseDAO<T> {
             }
         }
     }
-
-    protected abstract Class<T> getEntityClass();
 }

@@ -47,12 +47,17 @@
             <version>2.7.12</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <exec.mainClass>br.cefetmg.gestaoentregasentidades.GestaoEntregasEntidades</exec.mainClass>
+        <exec.mainClass>br.cefetmg.gestaoentregasentidades.entidades.Main</exec.mainClass>
     </properties>
     <name>GestaoEntregasEntidades</name>
 </project>

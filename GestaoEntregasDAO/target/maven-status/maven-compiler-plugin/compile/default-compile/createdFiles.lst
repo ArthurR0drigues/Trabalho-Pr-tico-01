@@ -1,9 +1,2 @@
-br\cefetmg\gestaoentregasdao\daos\ItemPedidoDAO.class
-br\cefetmg\gestaoentregasdao\daos\exceptions\DAOException.class
-br\cefetmg\gestaoentregasdao\daos\BaseDAO.class
-br\cefetmg\gestaoentregasdao\daos\PerfilDAO.class
-br\cefetmg\gestaoentregasdao\daos\ProdutoDAO.class
-br\cefetmg\gestaoentregasdao\daos\FuncionarioDAO.class
-br\cefetmg\gestaoentregasdao\daos\EmpresaDAO.class
-br\cefetmg\gestaoentregasdao\daos\ClienteDAO.class
-br\cefetmg\gestaoentregasdao\daos\PedidoDAO.class
+br\cefetmg\gestaoentregasdao\dao\exceptions\DAOException.class
+br\cefetmg\gestaoentregasdao\dao\DAO.class

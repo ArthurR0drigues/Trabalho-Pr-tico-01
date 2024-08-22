@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "empresa")
-public class EmpresaEntidade implements Serializable {
+public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,14 +16,14 @@ public class EmpresaEntidade implements Serializable {
     private double porcentagemComissaoEntregador;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empresa")
-    private List<FuncionarioEntidade> funcionarios;
+    private List<Funcionario> funcionarios;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empresa")
-    private List<ClienteEntidade> clientes;
+    private List<Cliente> clientes;
 
-    public EmpresaEntidade() {}
+    public Empresa() {}
 
-    public EmpresaEntidade(int id, String nome, String CNPJ, String CPF, double porcentagemComissaoEntregador, List<FuncionarioEntidade> funcionarios, List<ClienteEntidade> clientes) {
+    public Empresa(int id, String nome, String CNPJ, String CPF, double porcentagemComissaoEntregador, List<Funcionario> funcionarios, List<Cliente> clientes) {
         this.id = id;
         this.nome = nome;
         this.CNPJ = CNPJ;
@@ -73,19 +73,19 @@ public class EmpresaEntidade implements Serializable {
         this.porcentagemComissaoEntregador = porcentagemComissaoEntregador;
     }
 
-    public List<FuncionarioEntidade> getFuncionarios() {
+    public List<Funcionario> getFuncionarios() {
         return funcionarios;
     }
 
-    public void setFuncionarios(List<FuncionarioEntidade> funcionarios) {
+    public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
 
-    public List<ClienteEntidade> getClientes() {
+    public List<Cliente> getClientes() {
         return clientes;
     }
 
-    public void setClientes(List<ClienteEntidade> clientes) {
+    public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
     }
 }
