@@ -41,7 +41,7 @@ public class DAO<T> {
         }
     }
 
-    public T consultar(Long id) throws DAOException {
+    public T consultar(Integer id) throws DAOException {
         EntityManager entityManager = null;
         T result;
         try {
