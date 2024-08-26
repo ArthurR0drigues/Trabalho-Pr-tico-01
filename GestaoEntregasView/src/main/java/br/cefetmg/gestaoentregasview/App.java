@@ -30,7 +30,7 @@ public class App extends Application {
         Empresa novo = new Empresa(1, "snacksmart", "cnpjoto", "123456789-11", 0.1, funcionarios, clientes);
         teste.salvar(novo);
         System.out.println(teste.consultar(1).getNome());
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("telaLogin"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
