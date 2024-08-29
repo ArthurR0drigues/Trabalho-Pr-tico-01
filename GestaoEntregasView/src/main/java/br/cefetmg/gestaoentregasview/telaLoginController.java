@@ -1,6 +1,5 @@
 package br.cefetmg.gestaoentregasview;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
