@@ -1,13 +1,67 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.cefetmg.gestaoentregascontroller;
 
-/**
- *
- * @author mathe
- */
-public class ItemPedidoController {
+import br.cefetmg.gestaoentregasdao.dao.DAO;
+import br.cefetmg.gestaoentregasdao.dao.exceptions.DAOException;
+import br.cefetmg.gestaoentregasentidades.entidades.ItemPedido;
+
+import java.util.List;
+
+public class ItemPedidoController implements EntidadeController<ItemPedido> {
     
+    private DAO<ItemPedido> itemPedidoDAO;
+
+    public ItemPedidoController() {
+        try {
+            this.itemPedidoDAO = new DAO<>(ItemPedido.class, "persistence");
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void salvar(ItemPedido itemPedido) {
+        try {
+            itemPedidoDAO.salvar(itemPedido);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public ItemPedido consultar(Integer id) {
+        try {
+            return itemPedidoDAO.consultar(id);
+        } catch (DAOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ItemPedido> consultarTodos() {
+        try {
+            return itemPedidoDAO.consultarTodos();
+        } catch (DAOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    @Override
+    public void atualizar(ItemPedido itemPedido) {
+        try {
+            itemPedidoDAO.atualizar(itemPedido);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletar(ItemPedido itemPedido) {
+        try {
+            itemPedidoDAO.deletar(itemPedido);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,3 +1,5 @@
-br\cefetmg\gestaoentregasview\MenuController.class
 br\cefetmg\gestaoentregasview\TelaLoginController.class
 br\cefetmg\gestaoentregasview\App.class
+br\cefetmg\gestaoentregasview\CadastroFuncionarioController.class
+br\cefetmg\gestaoentregasview\MenuController.class
+br\cefetmg\gestaoentregasview\RegistrosController.class

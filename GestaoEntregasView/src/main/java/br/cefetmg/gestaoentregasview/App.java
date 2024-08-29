@@ -1,5 +1,7 @@
 package br.cefetmg.gestaoentregasview;
 
+import br.cefetmg.gestaoentregascontroller.ClienteController;
+import br.cefetmg.gestaoentregascontroller.EmpresaController;
 import br.cefetmg.gestaoentregasdao.dao.DAO;
 import br.cefetmg.gestaoentregasdao.dao.exceptions.DAOException;
 import br.cefetmg.gestaoentregasentidades.entidades.Cliente;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.layout.VBox;
 
 /**
  * JavaFX App
@@ -23,15 +26,18 @@ public class App extends Application {
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException, DAOException {
-        ArrayList<Cliente> clientes = new ArrayList<>();
-        ArrayList<Funcionario> funcionarios = new ArrayList<>();
-        DAO<Empresa> teste = new DAO<Empresa>(Empresa.class, "persistence");
-        Empresa novo = new Empresa(1, "snacksmart", "cnpjoto", "123456789-11", 0.1, funcionarios, clientes);
-        teste.salvar(novo);
-        System.out.println(teste.consultar(1).getNome());
-        scene = new Scene(loadFXML("telaLogin"), 640, 480);
+    public void start(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("registros.fxml"));
+        loader.setControllerFactory(c -> {
+            if (RegistrosController.class.isAssignableFrom(c)) {
+                return new RegistrosController<>(new EmpresaController(), Empresa.class);
+            }
+            return null;
+        });
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Registros de Empresa");
         stage.show();
     }
 
