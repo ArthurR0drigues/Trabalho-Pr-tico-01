@@ -8,10 +8,12 @@ import java.util.List;
 
 public class PerfilController implements EntidadeController<Perfil> {
     
+    private Class<Perfil> perfilEntidade;
     private DAO<Perfil> perfilDAO;
 
     public PerfilController() {
         try {
+            this.perfilEntidade = Perfil.class;
             this.perfilDAO = new DAO<>(Perfil.class, "persistence");
         } catch (DAOException e) {
             e.printStackTrace();
@@ -63,5 +65,10 @@ public class PerfilController implements EntidadeController<Perfil> {
         } catch (DAOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public Class<Perfil> entidade() {
+        return this.perfilEntidade;
     }
 }

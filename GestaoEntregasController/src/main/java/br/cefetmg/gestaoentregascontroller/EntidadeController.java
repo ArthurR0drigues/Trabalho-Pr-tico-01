@@ -8,5 +8,6 @@ public interface EntidadeController<T> {
     List<T> consultarTodos();
     void atualizar(T entity);
     void deletar(T entity);
+    Class<T> entidade();
 }
 

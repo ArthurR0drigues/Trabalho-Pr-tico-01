@@ -8,10 +8,12 @@ import java.util.List;
 
 public class EmpresaController implements EntidadeController<Empresa> {
     
+    private Class<Empresa> empresaEntidade;
     private DAO<Empresa> empresaDAO;
 
     public EmpresaController() {
         try {
+            this.empresaEntidade = Empresa.class;
             this.empresaDAO = new DAO<>(Empresa.class, "persistence");
         } catch (DAOException e) {
             e.printStackTrace();
@@ -63,5 +65,10 @@ public class EmpresaController implements EntidadeController<Empresa> {
         } catch (DAOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public Class<Empresa> entidade() {
+        return this.empresaEntidade;
     }
 }

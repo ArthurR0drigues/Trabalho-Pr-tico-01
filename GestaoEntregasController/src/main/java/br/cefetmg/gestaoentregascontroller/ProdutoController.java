@@ -8,10 +8,12 @@ import java.util.List;
 
 public class ProdutoController implements EntidadeController<Produto> {
     
+    private Class<Produto> produtoEntidade;
     private DAO<Produto> produtoDAO;
 
     public ProdutoController() {
         try {
+            this.produtoEntidade = Produto.class;
             this.produtoDAO = new DAO<>(Produto.class, "persistence");
         } catch (DAOException e) {
             e.printStackTrace();
@@ -63,5 +65,10 @@ public class ProdutoController implements EntidadeController<Produto> {
         } catch (DAOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public Class<Produto> entidade() {
+        return this.produtoEntidade;
     }
 }

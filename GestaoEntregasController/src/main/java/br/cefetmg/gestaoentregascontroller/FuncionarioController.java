@@ -8,10 +8,12 @@ import java.util.List;
 
 public class FuncionarioController implements EntidadeController<Funcionario> {
     
+    private Class<Funcionario> funcionarioEntidade;
     private DAO<Funcionario> funcionarioDAO;
 
     public FuncionarioController() {
         try {
+            this.funcionarioEntidade = Funcionario.class;
             this.funcionarioDAO = new DAO<>(Funcionario.class, "persistence");
         } catch (DAOException e) {
             e.printStackTrace();
@@ -63,5 +65,10 @@ public class FuncionarioController implements EntidadeController<Funcionario> {
         } catch (DAOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public Class<Funcionario> entidade() {
+        return this.funcionarioEntidade;
     }
 }

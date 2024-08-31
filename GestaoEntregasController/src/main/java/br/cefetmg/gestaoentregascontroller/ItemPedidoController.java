@@ -8,10 +8,12 @@ import java.util.List;
 
 public class ItemPedidoController implements EntidadeController<ItemPedido> {
     
+    private Class<ItemPedido> itemPedidoEntidade;
     private DAO<ItemPedido> itemPedidoDAO;
 
     public ItemPedidoController() {
         try {
+            this.itemPedidoEntidade = ItemPedido.class;
             this.itemPedidoDAO = new DAO<>(ItemPedido.class, "persistence");
         } catch (DAOException e) {
             e.printStackTrace();
@@ -63,5 +65,10 @@ public class ItemPedidoController implements EntidadeController<ItemPedido> {
         } catch (DAOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public Class<ItemPedido> entidade() {
+        return this.itemPedidoEntidade;
     }
 }
