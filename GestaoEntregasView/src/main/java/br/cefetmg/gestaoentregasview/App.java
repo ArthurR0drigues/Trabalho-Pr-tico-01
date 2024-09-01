@@ -29,23 +29,25 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("registros.fxml"));
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("formularios.fxml"));
+        
         loader.setControllerFactory(c -> {
-            if (RegistrosController.class.isAssignableFrom(c)) {
-                var bingos = new EmpresaController();
+            if (FormulariosController.class.isAssignableFrom(c)) {
+                var bingos = new PerfilController();
                 var dingos = bingos.entidade();
-                return new RegistrosController<>(bingos, dingos);
+                return new FormulariosController<>(bingos, dingos);
             }
             return null;
         });
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Registros de Empresa");
+        stage.setTitle("Formulário de Perfil");
         stage.setResizable(false);
         stage.show();
         
-        App.abrirNovaJanela("Cliente", new ClienteController());
+        App.abrirRegistros("Registros de Perfil", new PerfilController());
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -63,16 +65,16 @@ public class App extends Application {
 
     /**
      * Método estático que abre uma nova janela.
-     * @param nome (nome da entidade)
+     * @param titulo (titulo da janela )
      * @param controller (controller respectivo à entidade)
      * @throws IOException
      */
-    public static void abrirNovaJanela(String nome, EntidadeController controller) throws IOException {
+    public static void abrirRegistros(String titulo, EntidadeController controller) throws IOException {
     
         FXMLLoader loader = new FXMLLoader(App.class.getResource("registros.fxml"));
 
         loader.setControllerFactory(c -> {
-            if (RegistrosController.class.isAssignableFrom(c)) {
+            if(RegistrosController.class.isAssignableFrom(c)) {
                 return new RegistrosController<>(controller, controller.entidade());
             }
             return null;
@@ -84,7 +86,35 @@ public class App extends Application {
         Stage novaJanela = new Stage();
 
         novaJanela.setScene(scene);
-        novaJanela.setTitle("Registros de " + nome);
+        novaJanela.setTitle(titulo);
+        novaJanela.setResizable(false);
+        novaJanela.showAndWait();
+    }
+    
+    /**
+     * Método estático que abre uma nova janela.
+     * @param titulo (titulo da janela )
+     * @param controller (controller respectivo à entidade)
+     * @throws IOException
+     */
+    public static void abrirFormulario(String titulo, EntidadeController controller) throws IOException {
+    
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("formularios.fxml"));
+
+        loader.setControllerFactory(c -> {
+            if(FormulariosController.class.isAssignableFrom(c)) {
+                return new FormulariosController<>(controller, controller.entidade());
+            }
+            return null;
+        });
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        Stage novaJanela = new Stage();
+
+        novaJanela.setScene(scene);
+        novaJanela.setTitle(titulo);
         novaJanela.setResizable(false);
         novaJanela.showAndWait();
     }

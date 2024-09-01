@@ -27,8 +27,8 @@ public class RegistrosController<T> {
 
     @FXML
     public void initialize() {
-        configurarColunas();
-        carregarDados();
+        this.configurarColunas();
+        this.carregarDados();
     }
 
     private void configurarColunas() {
