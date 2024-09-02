@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.RegistrosController">
-    <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.gestaoentregasview.RegistrosController">
+    <TableView fx:id="tableView" prefHeight="400.0" prefWidth="540.0" VBox.vgrow="ALWAYS">
           <!-- As colunas serão configuradas dinamicamente pelo controlador -->
     </TableView>
 </AnchorPane>
-

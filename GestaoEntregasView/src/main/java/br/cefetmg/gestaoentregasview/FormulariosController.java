@@ -1,8 +1,10 @@
 package br.cefetmg.gestaoentregasview;
 
 import br.cefetmg.gestaoentregascontroller.EntidadeController;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -25,7 +27,12 @@ public class FormulariosController<T> {
 
     private final EntidadeController<T> controller;
     private final Class<T> entityClass;
-
+    
+    public FormulariosController() {
+        this.controller = null;
+        this.entityClass = null;
+    }
+     
     public FormulariosController(EntidadeController<T> controller, Class<T> entityClass) {
         this.controller = controller;
         this.entityClass = entityClass;
@@ -37,7 +44,7 @@ public class FormulariosController<T> {
         this.mensagem.setText(this.entityClass.getSimpleName());
     }
     
-    @FXML
+    /*@FXML
     public void handleAdicionar() {
         try {
             T entidade = entityClass.getDeclaredConstructor().newInstance();
@@ -47,7 +54,7 @@ public class FormulariosController<T> {
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             System.out.println("Erro ao adicionar entidade: " + e.getMessage());
         }
-    }
+    }*/
 
     @FXML
     public void handleSalvar() {
@@ -72,12 +79,27 @@ public class FormulariosController<T> {
             System.out.println("Erro ao excluir entidade: " + e.getMessage());
         }
     }
-
+    @FXML
+    public void sairParaMenu(ActionEvent event) throws IOException {
+        App.setRoot("menu");  
+    }
+    
     private void preencherEntidade(T entidade) {
         for (Node node : form.getChildren()) {
             if (node instanceof HBox) {
                 HBox hbox = (HBox) node;
-                Label label = (Label) hbox.getChildren().get(0);
+                if (hbox.getChildren().size() < 2) {
+                    System.out.println("HBox não há elementos, pulando...");
+                    continue;
+                }
+
+                Node firstChild = hbox.getChildren().get(0);
+                if (!(firstChild instanceof Label)) {
+                    System.out.println("Expected first child to be a Label, but found: " + firstChild.getClass().getSimpleName());
+                    continue;
+                }
+
+                Label label = (Label) firstChild;
                 Node inputField = hbox.getChildren().get(1);
                 String fieldName = label.getText();
                 Field field;
@@ -100,7 +122,7 @@ public class FormulariosController<T> {
                     } else if (inputField instanceof ComboBox) {
                         value = ((ComboBox<?>) inputField).getValue();
                     }
-                    
+
                     field.set(entidade, value);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
                     e.printStackTrace();

@@ -24,6 +24,7 @@ public class TelaLoginController {
         System.out.println("Nome: " + nome);
         System.out.println("Senha: " + senha);
         
+        
         App.setRoot("menu");
     }
 

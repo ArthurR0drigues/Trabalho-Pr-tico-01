@@ -9,6 +9,7 @@ import br.cefetmg.gestaoentregasdao.dao.exceptions.DAOException;
 import br.cefetmg.gestaoentregasentidades.entidades.Cliente;
 import br.cefetmg.gestaoentregasentidades.entidades.Empresa;
 import br.cefetmg.gestaoentregasentidades.entidades.Funcionario;
+import br.cefetmg.gestaoentregasentidades.entidades.Perfil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,27 +30,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("formularios.fxml"));
-        
-        loader.setControllerFactory(c -> {
-            if (FormulariosController.class.isAssignableFrom(c)) {
-                var bingos = new PerfilController();
-                var dingos = bingos.entidade();
-                return new FormulariosController<>(bingos, dingos);
-            }
-            return null;
-        });
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/cefetmg/gestaoentregasview/telaLogin.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Formulário de Perfil");
+        stage.setTitle("Tela de Login");
         stage.setResizable(false);
         stage.show();
-        
-        App.abrirRegistros("Registros de Perfil", new PerfilController());
     }
-
+    
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
@@ -88,7 +77,7 @@ public class App extends Application {
         novaJanela.setScene(scene);
         novaJanela.setTitle(titulo);
         novaJanela.setResizable(false);
-        novaJanela.showAndWait();
+        novaJanela.show();
     }
     
     /**
@@ -116,6 +105,7 @@ public class App extends Application {
         novaJanela.setScene(scene);
         novaJanela.setTitle(titulo);
         novaJanela.setResizable(false);
-        novaJanela.showAndWait();
+        novaJanela.show();
+        
     }
 }
