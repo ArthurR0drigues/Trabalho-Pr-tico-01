@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.RelatorioController">
-    
-</AnchorPane>
+<VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.RelatorioController">
+   <children>
+      <Text text="Selecione o período do relatório" />
+      <DatePicker fx:id="dataInicio" promptText="Data de início" />
+      <DatePicker fx:id="dataFim" promptText="Data de fim" />
+      <Button fx:id="botaoGerarRelatorio" mnemonicParsing="false" onAction="#gerarRelatorio" text="Gerar relatório" />
+   </children>
+</VBox>

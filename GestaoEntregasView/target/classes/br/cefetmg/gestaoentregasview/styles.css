@@ -1,8 +1,0 @@
-#botaoLogin:hover {
-    -fx-border-color: black; 
-}
-
-#botaoLogin {
-    -fx-background-color: lightcoral; 
-    -fx-border-color: lightcoral; 
-}

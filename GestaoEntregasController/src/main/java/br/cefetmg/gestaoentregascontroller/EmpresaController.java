@@ -1,10 +1,14 @@
 package br.cefetmg.gestaoentregascontroller;
 
+import br.cefetmg.gestaoentregascontroller.exceptions.ValidationException;
 import br.cefetmg.gestaoentregasdao.dao.DAO;
 import br.cefetmg.gestaoentregasdao.dao.exceptions.DAOException;
 import br.cefetmg.gestaoentregasentidades.entidades.Empresa;
+import br.cefetmg.gestaoentregasentidades.util.CPFValidator;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EmpresaController implements EntidadeController<Empresa> {
     
@@ -23,9 +27,17 @@ public class EmpresaController implements EntidadeController<Empresa> {
     @Override
     public void salvar(Empresa empresa) {
         try {
+            
+            if(!CPFValidator.vef(empresa.getCPF())) {
+                throw new ValidationException("CPF Inválido");
+            }
+            
             empresaDAO.salvar(empresa);
+            
         } catch (DAOException e) {
             e.printStackTrace();
+        } catch (ValidationException e) {
+            System.out.println("Erro de validação: " + e.getMessage());
         }
     }
 
@@ -52,9 +64,16 @@ public class EmpresaController implements EntidadeController<Empresa> {
     @Override
     public void atualizar(Empresa empresa) {
         try {
+            
+            if(!CPFValidator.vef(empresa.getCPF())) {
+                throw new ValidationException("CPF Inválido");
+            }
+            
             empresaDAO.atualizar(empresa);
         } catch (DAOException e) {
             e.printStackTrace();
+        } catch (ValidationException ex) {
+            Logger.getLogger(EmpresaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

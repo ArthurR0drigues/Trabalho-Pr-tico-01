@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TableColumn?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.MenuEntregadorController">
+   <VBox layoutY="69.0" prefHeight="358.0" prefWidth="600.0">
+      <children>
+          <TableView fx:id="tableView" prefHeight="362.0" prefWidth="600.0">
+            <TableColumn fx:id="colunaData" prefWidth="150.0" text="Data" />
+            <TableColumn fx:id="colunaValorTotal" prefWidth="150.0" text="ValorTotal" />
+            <TableColumn fx:id="colunaEnum" prefWidth="150.0" text="Status" />
+          </TableView>
+      </children>
+   </VBox>
+   <Label alignment="BASELINE_LEFT" layoutX="23.0" layoutY="24.0" lineSpacing="1.0" prefHeight="35.0" prefWidth="511.0" text="Menu de entregador" textAlignment="CENTER">
+      <font>
+         <Font name="Arial" size="21.0" />
+      </font>
+   </Label>
+</AnchorPane>

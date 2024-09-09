@@ -1,10 +1,15 @@
 package br.cefetmg.gestaoentregascontroller;
 
+import br.cefetmg.gestaoentregascontroller.exceptions.ValidationException;
 import br.cefetmg.gestaoentregasdao.dao.DAO;
 import br.cefetmg.gestaoentregasdao.dao.exceptions.DAOException;
 import br.cefetmg.gestaoentregasentidades.entidades.Cliente;
+import br.cefetmg.gestaoentregasentidades.util.CPFValidator;
+import br.cefetmg.gestaoentregasentidades.util.PhoneNumberValidator;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClienteController implements EntidadeController<Cliente> {
     
@@ -23,9 +28,19 @@ public class ClienteController implements EntidadeController<Cliente> {
     @Override
     public void salvar(Cliente cliente) {
         try {
+            
+            if(!PhoneNumberValidator.vef(cliente.getTelefone())) {
+                throw new ValidationException("Telefone Inválido");
+            }
+            if(!CPFValidator.vef(cliente.getCPF())) {
+                throw new ValidationException("CPF Inválido");
+            }
+            
             clienteDAO.salvar(cliente);
         } catch (DAOException e) {
             e.printStackTrace();
+        } catch (ValidationException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -52,9 +67,19 @@ public class ClienteController implements EntidadeController<Cliente> {
     @Override
     public void atualizar(Cliente cliente) {
         try {
+            
+            if(!PhoneNumberValidator.vef(cliente.getTelefone())) {
+                throw new ValidationException("Telefone Inválido");
+            }
+            if(!CPFValidator.vef(cliente.getCPF())) {
+                throw new ValidationException("CPF Inválido");
+            }
+            
             clienteDAO.atualizar(cliente);
         } catch (DAOException e) {
             e.printStackTrace();
+        } catch (ValidationException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

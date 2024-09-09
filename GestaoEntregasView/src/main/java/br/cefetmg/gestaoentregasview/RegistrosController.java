@@ -32,21 +32,47 @@ public class RegistrosController<T> {
     }
 
     private void configurarColunas() {
-        
-        for(Field field : entityClass.getDeclaredFields()) {
+        for (Field field : entityClass.getDeclaredFields()) {
 
-            if(Modifier.isFinal(field.getModifiers()) || Modifier.isStatic(field.getModifiers())) continue;
-            if(field.isAnnotationPresent(javax.persistence.ManyToOne.class) || field.isAnnotationPresent(javax.persistence.OneToMany.class)) continue;
+            if (Modifier.isFinal(field.getModifiers()) || Modifier.isStatic(field.getModifiers())) continue;
+            if (field.isAnnotationPresent(javax.persistence.OneToMany.class)) continue;
 
-            TableColumn<T, String> coluna = new TableColumn<>(field.getName());
-            coluna.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
+            TableColumn<T, String> coluna;
+
+            if (field.getType().isAnnotationPresent(javax.persistence.Entity.class)) {
+                
+                coluna = new TableColumn<>(field.getName() + " (ID)");
+
+                coluna.setCellValueFactory(cellData -> {
+                    try {
+                        field.setAccessible(true);
+                        Object relatedEntity = field.get(cellData.getValue());
+
+                        if (relatedEntity != null) {
+                            Field idField = relatedEntity.getClass().getDeclaredField("id");
+                            idField.setAccessible(true);
+                            Object idValue = idField.get(relatedEntity);
+                            return new javafx.beans.property.SimpleStringProperty(idValue != null ? idValue.toString() : "");
+                        }
+                        return new javafx.beans.property.SimpleStringProperty("");
+                    } catch (IllegalAccessException | NoSuchFieldException e) {
+                        e.printStackTrace();
+                        return new javafx.beans.property.SimpleStringProperty("Erro");
+                    }
+                });
+
+            } else {
+                coluna = new TableColumn<>(field.getName());
+                coluna.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
+            }
+
+            coluna.setPrefWidth(150);
             tableView.getColumns().add(coluna);
         }
     }
 
     private void carregarDados() {
         List<T> registros = controller.consultarTodos();
-        System.out.println(registros.size());
         ObservableList<T> observableList = FXCollections.observableArrayList(registros);
         tableView.setItems(observableList);
     }

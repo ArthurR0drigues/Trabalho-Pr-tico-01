@@ -1,29 +1,14 @@
 package br.cefetmg.gestaoentregasview;
 
-import br.cefetmg.gestaoentregascontroller.ClienteController;
-import br.cefetmg.gestaoentregascontroller.EmpresaController;
 import br.cefetmg.gestaoentregascontroller.EntidadeController;
-import br.cefetmg.gestaoentregascontroller.PerfilController;
-import br.cefetmg.gestaoentregasdao.dao.DAO;
-import br.cefetmg.gestaoentregasdao.dao.exceptions.DAOException;
-import br.cefetmg.gestaoentregasentidades.entidades.Cliente;
-import br.cefetmg.gestaoentregasentidades.entidades.Empresa;
-import br.cefetmg.gestaoentregasentidades.entidades.Funcionario;
-import br.cefetmg.gestaoentregasentidades.entidades.Perfil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import javafx.scene.layout.VBox;
 
-/**
- * JavaFX App
- */
+
 public class App extends Application {
 
     private static Scene scene;
@@ -51,13 +36,17 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+    
+    public static void abrirJanela(String fxml) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage novaJanela = new Stage();
+        novaJanela.setScene(scene);
+        novaJanela.setResizable(false);
+        novaJanela.show();
+    }
 
-    /**
-     * Método estático que abre uma nova janela.
-     * @param titulo (titulo da janela )
-     * @param controller (controller respectivo à entidade)
-     * @throws IOException
-     */
     public static void abrirRegistros(String titulo, EntidadeController controller) throws IOException {
     
         FXMLLoader loader = new FXMLLoader(App.class.getResource("registros.fxml"));
@@ -80,12 +69,6 @@ public class App extends Application {
         novaJanela.show();
     }
     
-    /**
-     * Método estático que abre uma nova janela.
-     * @param titulo (titulo da janela )
-     * @param controller (controller respectivo à entidade)
-     * @throws IOException
-     */
     public static void abrirFormulario(String titulo, EntidadeController controller) throws IOException {
     
         FXMLLoader loader = new FXMLLoader(App.class.getResource("formularios.fxml"));
@@ -106,6 +89,5 @@ public class App extends Application {
         novaJanela.setTitle(titulo);
         novaJanela.setResizable(false);
         novaJanela.show();
-        
     }
 }

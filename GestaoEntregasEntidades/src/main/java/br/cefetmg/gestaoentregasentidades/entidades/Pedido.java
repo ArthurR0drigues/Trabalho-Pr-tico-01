@@ -126,7 +126,7 @@ public class Pedido implements Serializable {
         return observacao;
     }
 
-    public void setObservacoes(String observações) {
+    public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
 }
